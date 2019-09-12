@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".HtmlActivity">
+
+    <TextView
+            android:id="@+id/change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_btn_bg"
+            android:padding="4dp"
+            android:layout_gravity="center"
+            android:text="显示正文"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/html"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="#444"
+                android:textSize="14dp"
+                android:text=""
+                android:hint="暂无html代码"
+                android:padding="10dp"
+                android:lineSpacingExtra="4dp"/>
+
+    </ScrollView>
+
+</LinearLayout>

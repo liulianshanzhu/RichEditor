@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:orientation="vertical"
+        android:background="#ffffff">
+
+    <androidx.appcompat.widget.Toolbar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            app:title="编辑文章">
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="1px"
+          android:background="#cccccc"/>
+    <ImageView android:layout_width="match_parent" android:layout_height="wrap_content"
+               android:id="@+id/cover"/>
+
+    <com.durian.richeditor.editor.RichEditor
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/editor"
+            android:text="Hello World!"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="#eeeeee">
+
+        <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+            <LinearLayout
+                    android:id="@+id/menu_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal">
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+
+</LinearLayout>
