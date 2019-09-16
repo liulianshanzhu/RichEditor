@@ -20,6 +20,7 @@ class RichEditor @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     var onAddCover: (() -> Unit)? = null
     var onOutputHtml: ((String) -> Unit)? = null
+    var onOutputPartHtml: ((String) -> Unit)? = null
 
     private val SETUP_HTML = "file:///android_asset/editor.html"
 
@@ -145,8 +146,12 @@ class RichEditor @JvmOverloads constructor(context: Context, attrs: AttributeSet
         load("javascript:EDITOR.insertLink('$title', '$name');")
     }
 
-    fun getHtml() {
-        loadUrl("javascript:window.EditorJs.getHtml('<head>'+" + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+    fun getHtml(all: Boolean) {
+        if (all) {
+            loadUrl("javascript:window.EditorJs.getHtml('<head>'+" + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
+        }else {
+            loadUrl("javascript:window.EditorJs.getPartHtml(" + "document.getElementById('editor').innerHTML+'');");
+        }
     }
 
     private fun colorHex(color: Int): String {
@@ -176,6 +181,11 @@ class RichEditor @JvmOverloads constructor(context: Context, attrs: AttributeSet
         @JavascriptInterface
         fun getHtml(html: String) {
             onOutputHtml?.invoke(html)
+        }
+
+        @JavascriptInterface
+        fun getPartHtml(html: String) {
+            onOutputPartHtml?.invoke(html)
         }
     }
 

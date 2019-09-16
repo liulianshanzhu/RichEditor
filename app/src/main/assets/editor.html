@@ -24,8 +24,8 @@
         <img id="cover" class="cover_img_style" alt="">
 
     </div>
-
-    <div id="title" class="textarea" contenteditable="true" placeholder="请输入标题"></div>
+    <textarea rows=1 maxlength="40" class='textarea' placeholder="请输入标题"
+              onfocus="window.obj=this;this.clock=setInterval(function(){obj.style.height=obj.scrollHeight+'px';},5);" onblur="clearInterval(this.clock);"></textarea>
 
     <div class="line"></div>
     <div id="editor" class="editor" contenteditable="true" placeholder="请输入正文"></div>

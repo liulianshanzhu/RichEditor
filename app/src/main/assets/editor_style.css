@@ -84,32 +84,61 @@ div:empty:before{
     border-top-style: solid;
     border-top-color: #DBDDE1;
     border-top-weight: 0.01rem;
-    margin-top: 0.26rem;
+    margin-top: 0rem;
 }
 .textarea{
-    width: auto;
+    display: block;
+    width: 100%;
+    overflow:scroll;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    box-sizing: border-box;
     min-height: 0.815rem;
     margin-top:0.296rem;
-    margin-right: 0.463rem;
-    margin-left: 0.463rem;
+    padding-right: 0.463rem;
+    padding-left: 0.463rem;
+    display:inline-block
     font-weight:600;
-    outline: 0;
-    border:none;
+    outline: none;
+    border:solid 1px #ffffff;
     text-weight:bold;
     font-size: 0.56rem;
     color:#444444;
     line-height: 24px;
     word-wrap: break-word;
-    overflow-x: hidden;
-    overflow-y: auto;
-    white-space:normal;
+    white-space:none;
     line-height:0.815rem;
 }
+input::-webkit-input-placeholder{
+    color:#9B9DAB;
+}
+input::-moz-placeholder{/* Mozilla Firefox 19+ */
+    color:#9B9DAB;
+}
+input:-moz-placeholder{/* Mozilla Firefox 4 to 18 */
+    color:#9B9DAB;
+}
+input:-ms-input-placeholder{/* Internet Explorer 10-11 */
+    color:#9B9DAB;
+}
+textarea::-webkit-input-placeholder{
+    color:#9B9DAB;
+}
+textarea::-moz-placeholder{/* Mozilla Firefox 19+ */
+    color:#9B9DAB;
+}
+textarea:-moz-placeholder{/* Mozilla Firefox 4 to 18 */
+    color:#9B9DAB;
+}
+textarea:-ms-input-placeholder{/* Internet Explorer 10-11 */
+    color:#9B9DAB;
+}
 .editor {
+    display: block;
     min-height: 0.46rem;
     margin-top: 0.278rem;
-    margin-right: 0.465rem;
-    margin-left: 0.465rem;
+    padding-right: 0.50rem;
+    padding-left: 0.50rem;
     margin-bottom: 0.278rem;
     font-size: 0.4444rem;
     line-height: 0.1.226rem;

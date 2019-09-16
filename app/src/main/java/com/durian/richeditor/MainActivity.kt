@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.util.TypedValue
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private val ADD_COVER = 0x01
     private val CROP_CODE = 0x2
     private val INSERT_IMG = 0x3;
+    private var allHtml = ""
+    private var partHtml = ""
     private lateinit var editor: RichEditor
     private lateinit var menu_container: LinearLayout
 
@@ -134,7 +137,7 @@ class MainActivity : AppCompatActivity() {
                     .build()
                     .show(object : ColorPickerPopup.ColorPickerObserver() {
                         override fun onColorPicked(color: Int) {
-                            menuView[it.type - 1].setTextColor(color)
+                            menuView[it.type].setTextColor(color)
                             editor.setTextColor(color)
                         }
                     })
@@ -170,7 +173,7 @@ class MainActivity : AppCompatActivity() {
                 }.show(supportFragmentManager, "link")
             }
             MenuType.CODE -> {
-                editor.getHtml()
+                editor.getHtml(true)
             }
         }
     }
@@ -186,8 +189,18 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, ADD_COVER)
         }
         editor.onOutputHtml = {
+            Log.e("HZMDurian", "all = $allHtml   part = $partHtml")
+            runOnUiThread {
+                allHtml = it
+                editor.getHtml(false)
+            }
+        }
+        editor.onOutputPartHtml = {
+            partHtml = it
+            Log.e("HZMDurian", "all = $allHtml   part = $partHtml")
             val intent = Intent(this, HtmlActivity::class.java)
-            intent.putExtra("html", it)
+            intent.putExtra("all", allHtml)
+            intent.putExtra("part", partHtml)
             startActivity(intent)
         }
 
