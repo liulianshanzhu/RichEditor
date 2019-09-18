@@ -19,13 +19,13 @@ Android的富文本编辑器，基于webview实现，已进行屏幕适配，兼
 点击添加封面，通过 *EditorJs.addCover()* 方法通知[RichEditor](https://github.com/liulianshanzhu/RichEditor/blob/master/app/src/main/java/com/durian/richeditor/editor/RichEditor.kt)进行处理  
 屏幕适配需将px转换成rem。详情查看[rem.js](https://github.com/liulianshanzhu/RichEditor/blob/master/app/src/main/assets/rem.js) 
   
-**支持html转json***  
+# 支持html转json  
 调用editor.getJson()方法，可以在EditorJs.getHtmlJson(json)获取转换后的json数据  
 
-**支持获取图片路径列表，方便上传服务器**  
+# 支持获取图片路径数组，方便上传服务器  
 调用editor.getImageList()方法，可以在EditorJs.getImageListJson(json: String)返回一个字符串，格式img-1-url,img-2-url...可自行切割获取Array数组  
 
-**实时获取标题和文本内容**  
+# 实时获取标题和文本内容  
 在Editor.titleChange(title)和Editor.contentChange(content)监听，注意ui交互时切换为主线程  
 
 
