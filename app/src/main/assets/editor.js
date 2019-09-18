@@ -6,6 +6,7 @@ var EDITOR = {
 		screenDpr: 0,
 		margin: 20
 	},
+	imageCache: new Map(),
 	init: function init() {
         //初始化内部变量
         var _self = this;
@@ -41,10 +42,9 @@ var EDITOR = {
             newWidth = width / screenDpr;
             newHeight = height / screenDpr;
         }
-        var image = '<div class="image-area" id="img-1">\n\t<div style="width:auto;display: inline-block;">\n\t\t<div style="position:relative;text-align:center;width:100%;">\n\t\t\t<img src="'+url+'"style="width:'+newWidth+'px;height:'+newHeight+'px;" class="image">\n\t\t\t<img src="ic_image_delete.png" id="'+id+'" class="image_delete" onclick="EDITOR.removeImage(\''+id+'\')">\n\t\t</div>\n\t</div>\n</div><br>\n'
+        var image = '<div class="image-area" id="'+id+'">\n\t<div style="width:auto;display: inline-block;">\n\t\t<div style="position:relative;text-align:center;width:100%;">\n\t\t\t<img src="'+url+'"style="width:'+newWidth+'px;height:'+newHeight+'px;" class="image">\n\t\t\t<img src="ic_image_delete.png" id="'+id+'" class="image_delete" onclick="EDITOR.removeImage(\''+id+'\')">\n\t\t</div>\n\t</div>\n</div><br>\n'
         _self.insertHtml(image);
-        var img = document.querySelector('img[src="' + url + '"]');
-        img.parentNode.contentEditable = false;
+        _self.imageCache.set(id, url);
     },
     saveRange: function saveRange() {
         //保存节点位置
@@ -66,8 +66,10 @@ var EDITOR = {
         }
     },
     removeImage: function removeImage(id) {
-        var node = document.getElementById(id).parentNode.parentNode;
+        var _self = this;
+        var node = document.getElementById(id);
         node.parentNode.removeChild(node)
+        _self.imageCache.delete(id)
     },
     setTextColor: function setTextColor(color) {
         document.execCommand("styleWithCSS", null, true);
@@ -113,6 +115,20 @@ var EDITOR = {
             var value = '<' + command + '>';
             document.execCommand('formatBlock', false, value);
         }
+    },
+    getImageList: function getImageList() {
+        var _self = this;
+        var json = ''
+        _self.imageCache.forEach(function (value, key, map) {
+            json = json + value + ','
+        });
+        EditorJs.getImageListJson(json);
+    },
+    getJson: function getJson() {
+        var editor = document.querySelector("#editor_parent");
+        var result = getChildrenJSON($(editor.innerHTML));
+        var str = JSON.stringify(result);
+        EditorJs.getHtmlJson(str);
     }
 }
 EDITOR.init();

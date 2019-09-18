@@ -21,6 +21,7 @@ class RichEditor @JvmOverloads constructor(context: Context, attrs: AttributeSet
     var onAddCover: (() -> Unit)? = null
     var onOutputHtml: ((String) -> Unit)? = null
     var onOutputPartHtml: ((String) -> Unit)? = null
+    var onOutputImageList: ((List<String>) -> Unit)? = null
 
     private val SETUP_HTML = "file:///android_asset/editor.html"
 
@@ -90,7 +91,6 @@ class RichEditor @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     fun setH(level: Int, normal: Boolean) {
         load("javascript:EDITOR.saveRange();")
-        Log.e("HZMDurian", "isselect = $normal")
         if (!normal) {
             load("javascript:EDITOR.exec('h$level')")
         } else {
@@ -146,12 +146,20 @@ class RichEditor @JvmOverloads constructor(context: Context, attrs: AttributeSet
         load("javascript:EDITOR.insertLink('$title', '$name');")
     }
 
+    fun getImageList() {
+        load("javascript:EDITOR.getImageList();")
+    }
+
     fun getHtml(all: Boolean) {
         if (all) {
             loadUrl("javascript:window.EditorJs.getHtml('<head>'+" + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
         }else {
             loadUrl("javascript:window.EditorJs.getPartHtml(" + "document.getElementById('editor').innerHTML+'');");
         }
+    }
+
+    fun getJson() {
+        load("javascript:EDITOR.getJson();")
     }
 
     private fun colorHex(color: Int): String {
@@ -186,6 +194,31 @@ class RichEditor @JvmOverloads constructor(context: Context, attrs: AttributeSet
         @JavascriptInterface
         fun getPartHtml(html: String) {
             onOutputPartHtml?.invoke(html)
+        }
+
+        @JavascriptInterface
+        fun onFocus(focus: Boolean) {
+
+        }
+
+        @JavascriptInterface
+        fun contentChange(content: String) {
+        }
+
+        @JavascriptInterface
+        fun titleChange(title: String) {
+
+        }
+
+        @JavascriptInterface
+        fun getImageListJson(json: String) {
+            val list = json.split(",")
+            onOutputImageList?.invoke(list)
+        }
+
+        @JavascriptInterface
+        fun getHtmlJson(json: String) {
+            Log.d("HZMDurian", "json = $json")
         }
     }
 

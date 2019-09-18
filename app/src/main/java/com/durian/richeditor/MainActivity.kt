@@ -173,6 +173,7 @@ class MainActivity : AppCompatActivity() {
                 }.show(supportFragmentManager, "link")
             }
             MenuType.CODE -> {
+                editor.getJson()
                 editor.getHtml(true)
             }
         }
@@ -189,7 +190,7 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, ADD_COVER)
         }
         editor.onOutputHtml = {
-            Log.e("HZMDurian", "all = $allHtml   part = $partHtml")
+//            Log.e("HZMDurian", "all = $allHtml   part = $partHtml")
             runOnUiThread {
                 allHtml = it
                 editor.getHtml(false)
@@ -197,7 +198,7 @@ class MainActivity : AppCompatActivity() {
         }
         editor.onOutputPartHtml = {
             partHtml = it
-            Log.e("HZMDurian", "all = $allHtml   part = $partHtml")
+//            Log.e("HZMDurian", "all = $allHtml   part = $partHtml")
             val intent = Intent(this, HtmlActivity::class.java)
             intent.putExtra("all", allHtml)
             intent.putExtra("part", partHtml)

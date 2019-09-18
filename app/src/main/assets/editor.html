@@ -25,11 +25,25 @@
 
     </div>
     <textarea rows=1 maxlength="40" class='textarea' placeholder="请输入标题"
-              onfocus="window.obj=this;this.clock=setInterval(function(){obj.style.height=obj.scrollHeight+'px';},5);" onblur="clearInterval(this.clock);"></textarea>
+              onfocus="window.obj=this;this.clock=setInterval(function(){obj.style.height=obj.scrollHeight+'px';},5);"
+              onblur="clearInterval(this.clock);"
+              onKeyUp="EditorJs.titleChange(obj.value);"
+              onMouseDown="EditorJs.titleChange(obj.value);"></textarea>
 
     <div class="line"></div>
-    <div id="editor" class="editor" contenteditable="true" placeholder="请输入正文"></div>
-</div>
+    <div id="editor_parent">
+        <div id="editor" class="editor" contenteditable="true"
+             onfocus="EditorJs.onFocus(true);"
+             onblur="EditorJs.onFocus(false)"
+             onKeyUp="EditorJs.contentChange(this.innerHTML);"
+             onMouseDown="EditorJs.contentChange(this.innerHTML);"
+             oninput="EditorJs.contentChange(this.innerHTML);"
+             placeholder="请输入正文"></div>
+
+        </div>
+    </div>
+<script src="./dom-core.js"></script>
+<script src="./html2json.js"></script>
 <script src="./editor.js"></script>
 </body>
 

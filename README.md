@@ -1,4 +1,4 @@
-Android的富文本编辑器，基于webview实现，已进行屏幕适配，兼容多种屏幕大小，主要有以下功能（后续待完善）：  
+Android的富文本编辑器，基于webview实现，已进行屏幕适配，兼容多种屏幕大小，支持html转json数据，主要有以下功能（后续待完善）：  
 1、**BOLD（粗体）**  
 2、**ITALIC（斜体）**  
 3、**STRIKETHROUGH（删除线）**  
@@ -19,6 +19,16 @@ Android的富文本编辑器，基于webview实现，已进行屏幕适配，兼
 点击添加封面，通过 *EditorJs.addCover()* 方法通知[RichEditor](https://github.com/liulianshanzhu/RichEditor/blob/master/app/src/main/java/com/durian/richeditor/editor/RichEditor.kt)进行处理  
 屏幕适配需将px转换成rem。详情查看[rem.js](https://github.com/liulianshanzhu/RichEditor/blob/master/app/src/main/assets/rem.js) 
   
+**支持html转json***  
+调用editor.getJson()方法，可以在EditorJs.getHtmlJson(json)获取转换后的json数据  
+
+**支持获取图片路径列表，方便上传服务器**  
+调用editor.getImageList()方法，可以在EditorJs.getImageListJson(json: String)返回一个字符串，格式img-1-url,img-2-url...可自行切割获取Array数组  
+
+**实时获取标题和文本内容**  
+在Editor.titleChange(title)和Editor.contentChange(content)监听，注意ui交互时切换为主线程  
+
+
 |**小知识点**|  
 1、一些相对布局对齐效果无法实现的情况下，可以通过多嵌套外层布局来达到目的，具体可参见插入图片（含删除）的代码添加  
 2、.js文件需要严格注明标点符号，不能缺失，必须形成严格的闭合，否则调用无效  

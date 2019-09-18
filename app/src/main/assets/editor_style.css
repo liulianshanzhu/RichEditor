@@ -1,6 +1,6 @@
 body {
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   use-select: none;
  }
@@ -95,10 +95,10 @@ div:empty:before{
     box-sizing: border-box;
     min-height: 0.815rem;
     margin-top:0.296rem;
-    padding-right: 0.463rem;
-    padding-left: 0.463rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
     display:inline-block
-    font-weight:600;
+    font-weight:900;
     outline: none;
     border:solid 1px #ffffff;
     text-weight:bold;
